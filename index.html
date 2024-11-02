@@ -91,13 +91,13 @@
 
             // Adjust the base number of revolutions and spin duration for each speed
             if (speed === 'slow') {
-                baseRevolutions = 3; // Low force = fewer spins
+                baseRevolutions = 1; // Low force = fewer spins
                 duration = 3; // Spin duration in seconds
             } else if (speed === 'medium') {
-                baseRevolutions = 6; // Medium force = moderate spins
+                baseRevolutions = 5; // Medium force = moderate spins
                 duration = 3.5;
             } else {
-                baseRevolutions = 12; // High force = more spins
+                baseRevolutions = 10; // High force = more spins
                 duration = 4; 
             }
 
@@ -107,6 +107,11 @@
             // Apply the spin effect with smooth transition
             wheel.style.transition = `transform ${duration}s ease-out`;
             wheel.style.transform = `rotate(${degrees}deg)`;
+
+            // Remove the transition after the spin completes to allow for consecutive spins
+            wheel.addEventListener('transitionend', () => {
+                wheel.style.transition = 'none';
+            }, { once: true });
         }
     </script>
 </body>
