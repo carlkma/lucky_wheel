@@ -13,27 +13,27 @@
             height: 100vh;
             background-color: #f0f0f0;
             position: relative;
+            overflow: hidden;
         }
 
-        /* Centering the wheel image with relative sizing */
+        /* Making the wheel occupy 90% of the screen */
         #wheel {
-            width: 50vmin; /* Relative size based on viewport */
-            height: 50vmin; /* Makes the wheel responsive */
+            width: 90vmin; /* Makes the wheel 90% of the viewport’s minimum dimension */
+            height: 90vmin;
             background-image: url('spinning_wheel_2.png'); /* Add your image path here */
             background-size: cover;
             border-radius: 50%;
             position: relative;
         }
 
-        /* Pointer styling and positioning at the bottom */
+        /* Arrow pointer design below the wheel */
         .pointer {
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid #ff0000; /* Red pointer */
+            width: 40px; /* Adjust width for visibility */
+            height: 60px; /* Adjust height for visibility */
+            background-color: #ff0000; /* Red arrow color */
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Creates an upward-pointing arrow */
             position: absolute;
-            bottom: -15px; /* Position pointer tip touching wheel */
+            bottom: -30px; /* Aligns the tip with the bottom of the wheel */
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
@@ -57,7 +57,7 @@
 </head>
 <body>
     <div class="wheel-container">
-        <!-- Pointer overlay -->
+        <!-- Arrow pointer below the wheel -->
         <div class="pointer"></div>
 
         <!-- Wheel image -->
