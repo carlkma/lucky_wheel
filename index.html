@@ -85,7 +85,14 @@
         function spinWheel(speed) {
             const wheel = document.getElementById('wheel');
 
-            // Base rotations for each speed setting
+            // Remove any previous inline styles to ensure a fresh start
+            wheel.style.transition = 'none';
+            wheel.style.transform = 'rotate(0deg)';
+
+            // Force a reflow to apply the reset before starting the new spin
+            void wheel.offsetWidth;
+
+            // Base revolutions for each speed setting
             let baseRevolutions;
             let duration;
 
@@ -107,11 +114,6 @@
             // Apply the spin effect with smooth transition
             wheel.style.transition = `transform ${duration}s ease-out`;
             wheel.style.transform = `rotate(${degrees}deg)`;
-
-            // Remove the transition after the spin completes to allow for consecutive spins
-            wheel.addEventListener('transitionend', () => {
-                wheel.style.transition = 'none';
-            }, { once: true });
         }
     </script>
 </body>
