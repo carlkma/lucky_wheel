@@ -26,25 +26,34 @@
             position: relative;
         }
 
-        /* Arrow pointer design below the wheel */
+        /* Enlarged, bold arrow pointer design below the wheel */
         .pointer {
-            width: 40px; /* Adjust width for visibility */
-            height: 60px; /* Adjust height for visibility */
-            background-color: #ff0000; /* Red arrow color */
+            width: 60px; /* Increased width for better visibility */
+            height: 80px; /* Increased height for better visibility */
+            background-color: #ff0000; /* Red color for contrast */
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Creates an upward-pointing arrow */
             position: absolute;
-            bottom: -30px; /* Aligns the tip with the bottom of the wheel */
+            bottom: -40px; /* Aligns the arrow’s tip with the bottom of the wheel */
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a shadow for emphasis */
+            border: 2px solid #fff; /* White border for extra contrast */
+        }
+
+        /* Button container styling */
+        .button-container {
+            position: absolute;
+            left: 10px; /* Positioning buttons to the left side of the screen */
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         /* Spin button styling */
         .spin-button {
-            position: absolute;
-            top: 85%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             padding: 10px 20px;
             font-size: 16px;
             background-color: #007bff;
@@ -52,26 +61,43 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            width: 100px; /* Consistent button width */
         }
     </style>
 </head>
 <body>
     <div class="wheel-container">
-        <!-- Arrow pointer below the wheel -->
+        <!-- Enlarged, bold arrow pointer below the wheel -->
         <div class="pointer"></div>
 
         <!-- Wheel image -->
         <div id="wheel"></div>
 
-        <!-- Spin button -->
-        <button class="spin-button" onclick="spinWheel()">Spin!</button>
+        <!-- Button container -->
+        <div class="button-container">
+            <button class="spin-button" onclick="spinWheel('slow')">Slow</button>
+            <button class="spin-button" onclick="spinWheel('medium')">Medium</button>
+            <button class="spin-button" onclick="spinWheel('fast')">Fast</button>
+        </div>
     </div>
     
     <script>
-        function spinWheel() {
+        function spinWheel(speed) {
             const wheel = document.getElementById('wheel');
             let degrees = Math.floor(Math.random() * 3600) + 360; // Random spin
-            wheel.style.transition = "transform 4s ease-out";
+            
+            // Set spin duration based on speed
+            let duration;
+            if (speed === 'slow') {
+                duration = 3.5;
+            } else if (speed === 'medium') {
+                duration = 2.5;
+            } else {
+                duration = 1.5;
+            }
+
+            // Apply spin effect
+            wheel.style.transition = `transform ${duration}s ease-out`;
             wheel.style.transform = `rotate(${degrees}deg)`;
         }
     </script>
