@@ -15,25 +15,25 @@
             position: relative;
         }
 
-        /* Centering the wheel image */
+        /* Centering the wheel image with relative sizing */
         #wheel {
-            width: 300px;
-            height: 300px;
+            width: 50vmin; /* Relative size based on viewport */
+            height: 50vmin; /* Makes the wheel responsive */
             background-image: url('spinning_wheel_2.png'); /* Add your image path here */
             background-size: cover;
             border-radius: 50%;
             position: relative;
         }
 
-        /* Creating the pointer */
+        /* Pointer styling and positioning at the bottom */
         .pointer {
             width: 0;
             height: 0;
             border-left: 15px solid transparent;
             border-right: 15px solid transparent;
-            border-bottom: 30px solid #ff0000; /* Red pointer */
+            border-top: 30px solid #ff0000; /* Red pointer */
             position: absolute;
-            top: 10px; /* Positioning above the wheel */
+            bottom: -15px; /* Position pointer tip touching wheel */
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
