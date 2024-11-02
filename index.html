@@ -20,7 +20,7 @@
         #wheel {
             width: 90vmin; /* Makes the wheel 90% of the viewport’s minimum dimension */
             height: 90vmin;
-            background-image: url('spinning_wheel_2.png'); /* Add your image path here */
+            background-image: url('path_to_your_wheel_image.png'); /* Add your image path here */
             background-size: cover;
             border-radius: 50%;
             position: relative;
@@ -28,23 +28,23 @@
 
         /* Enlarged, bold arrow pointer design below the wheel */
         .pointer {
-            width: 60px; /* Increased width for better visibility */
-            height: 80px; /* Increased height for better visibility */
-            background-color: #ff0000; /* Red color for contrast */
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Creates an upward-pointing arrow */
+            width: 60px;
+            height: 80px;
+            background-color: #ff0000;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             position: absolute;
-            bottom: -40px; /* Aligns the arrow’s tip with the bottom of the wheel */
+            bottom: -40px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a shadow for emphasis */
-            border: 2px solid #fff; /* White border for extra contrast */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 2px solid #fff;
         }
 
         /* Button container styling */
         .button-container {
             position: absolute;
-            left: 10px; /* Positioning buttons to the left side of the screen */
+            left: 10px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
@@ -61,7 +61,7 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            width: 100px; /* Consistent button width */
+            width: 100px;
         }
     </style>
 </head>
@@ -84,19 +84,27 @@
     <script>
         function spinWheel(speed) {
             const wheel = document.getElementById('wheel');
-            let degrees = Math.floor(Math.random() * 3600) + 360; // Random spin
-            
-            // Set spin duration based on speed
+
+            // Base rotations for each speed setting
+            let baseRevolutions;
             let duration;
+
+            // Adjust the base number of revolutions and spin duration for each speed
             if (speed === 'slow') {
-                duration = 3.5;
+                baseRevolutions = 3; // Low force = fewer spins
+                duration = 3; // Spin duration in seconds
             } else if (speed === 'medium') {
-                duration = 2.5;
+                baseRevolutions = 6; // Medium force = moderate spins
+                duration = 3.5;
             } else {
-                duration = 1.5;
+                baseRevolutions = 12; // High force = more spins
+                duration = 4; 
             }
 
-            // Apply spin effect
+            // Calculate the total degrees to spin, adding a random degree offset
+            const degrees = baseRevolutions * 360 + Math.floor(Math.random() * 360);
+
+            // Apply the spin effect with smooth transition
             wheel.style.transition = `transform ${duration}s ease-out`;
             wheel.style.transform = `rotate(${degrees}deg)`;
         }
